@@ -6,19 +6,22 @@
 }
 
 .infected {
-  border-left: 5px solid #33a3ff;
-  border-radius: 0% !important;
   margin: 2% 2% !important;
 }
 
-.recovered {
-  border-left: 5px solid #3cb371;
-  border-radius: 0% !important;
+.none {
   margin: 2% 2% !important;
 }
 
-.deaths {
-  border-left: 5px solid #ff3370;
-  border-radius: 0% !important;
-  margin: 2% 2% !important;
+.date {
+  font-size:0.8em;
+}
+
+.img {
+  width: 128;
+  height: 128;
+}
+
+.postday {
+  text-align: right;
 }

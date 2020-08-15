@@ -8,9 +8,7 @@ import {
     Container,
     Grid,
 } from "@material-ui/core";
-// import styles from "./inderx.module.css";
 
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 import { selectArticles, fetchAsyncGetDaily } from "./articleSlice";
@@ -28,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 const Index: React.FC = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const daily = useSelector(selectArticles)
+    // const daily = useSelector(selectArticles)
 
     useEffect(() => {
         dispatch(fetchAsyncGetDaily());
@@ -50,19 +48,10 @@ const Index: React.FC = () => {
             </AppBar>
 
             <Container className={classes.content}>
-                {/* <div className={styles.container}>
-                    <SwitchCountry />
-                </div> */}
                 <Grid container spacing={3}>
                     <Grid item xs={12} md={12}>
                         <Articles />
                     </Grid>
-                    {/* <Grid item xs={12} md={7}>
-                        <Chart />
-                    </Grid>
-                    <Grid item xs={12} md={5}>
-                        <PieChart />
-                    </Grid> */}
                 </Grid>
             </Container>
 
