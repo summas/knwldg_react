@@ -154,30 +154,22 @@ const Articles: React.FC = () => {
   };
 
   let arr = [];
-  let arr0 = [];
   let num: number = 0;
   for (let n in articles) {
     let val = articles[n];
     let val2 = articles[parseInt(n) + 1];
     if (parseInt(n) % 2 === 0) {
-
-      arr.push(
-        <TableRow key={val.id} style={{ width: '100%' }}>
-          {getArticle(val)}
-          {getArticle(val2)}
-        </TableRow>
-      );
-      arr0[num] = [val, val2];
+      arr[num] = [val, val2];
       num = num + 1;
     }
   }
-  console.log(arr.length)
+  // console.log(arr.length)
   // const emptyRows = rowsPerPage - Math.min(rowsPerPage, arr0.length - page * rowsPerPage);
   return (
     <div className={styles.container}>
       {(rowsPerPage > 0
-        ? arr0.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-        : arr0
+        ? arr.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+        : arr
       ).map((article) => (
         <Grid container spacing={1} justify="center">
           {getArticle(article[0])}
@@ -192,7 +184,7 @@ const Articles: React.FC = () => {
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
                 colSpan={3}
-                count={arr0.length}
+                count={arr.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{
