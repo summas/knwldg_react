@@ -1,12 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import styles from "./index.module.css";
-// import HOST from '../../appconf';
-// import CountUp from "react-countup";
-// import { Card, CardContent, Typography, Grid } from "@material-ui/core";
-
-// import { GiHastyGrave } from "react-icons/gi";
-// import { MdLocalHospital } from "react-icons/md";
-// import { AiFillLike } from "react-icons/ai";
 import { makeStyles } from "@material-ui/core/styles";
 
 import List from '@material-ui/core/List';
@@ -14,10 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import { MemoryRouter } from 'react-router';
 import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom';
 import { Omit } from '@material-ui/types';
@@ -29,7 +18,8 @@ import { fetchAsyncGetDaily } from "../article/articleSlice";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 360,
+    width: 240,
+    marginTop: 12,
   },
 }));
 
@@ -66,8 +56,8 @@ const Category: React.FC = () => {
   const dispatch = useDispatch();
 
   return (
-    <MemoryRouter initialEntries={['/drafts']} initialIndex={0}>
-      <div className={classes.root}>
+    <MemoryRouter initialEntries={['/drafts']} initialIndex={0} >
+      <div className={classes.root} style={{ textAlign: "center" }} >
         <Paper elevation={0}>
           <ListItem
             button
@@ -76,7 +66,7 @@ const Category: React.FC = () => {
             <ListItemText primary="カテゴリ" />
           </ListItem>
           <Divider />
-          <List aria-label="secondary mailbox folders">
+          <List aria-label="secondary mailbox ">
             {categories.map((category) => (
               <ListItem
                 button
@@ -88,8 +78,8 @@ const Category: React.FC = () => {
           </List>
         </Paper>
       </div>
-    </MemoryRouter >);
-
+    </MemoryRouter >
+  );
 };
 
 export default Category

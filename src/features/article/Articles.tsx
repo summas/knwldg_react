@@ -16,6 +16,7 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 import { useSelector } from "react-redux";
 import { selectArticles } from "./articleSlice";
@@ -107,7 +108,7 @@ let getArticle = (val: any) => {
   var date = new Date(val.created_at)
   return (
 
-    < Grid item xs={8} md={4} component={Card} className={styles.infected} key={val.id} >
+    < Grid item xs={8} md={4} component={Card} className={styles.article} key={val.id} >
       <CardActionArea >
         <CardContent >
           <Link href={`${HOST}/${str}`} >
@@ -125,7 +126,7 @@ let getArticle = (val: any) => {
             </Grid>
             <div className={styles.postday}>
               <Typography variant="overline" color="textSecondary" >
-                投稿日: {date.toLocaleDateString()}
+                <AccessTimeIcon fontSize="inherit" /> {date.toLocaleDateString()}
               </Typography>
             </div>
           </Link>
@@ -171,7 +172,7 @@ const Articles: React.FC = () => {
         ? arr.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
         : arr
       ).map((article) => (
-        <Grid container spacing={1} justify="center">
+        <Grid container spacing={2} justify="center">
           {getArticle(article[0])}
           {getArticle(article[1])}
         </Grid>
