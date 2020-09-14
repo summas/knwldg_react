@@ -14,7 +14,7 @@ import { fetchAsyncSetPage } from "../article/pageSlice";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 240,
+    width: 200,
     marginTop: 12,
   },
 }));
@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
 const chgCategory = (category_id: String, dispatch: any) => {
   dispatch(fetchAsyncSetPage(1))
   dispatch(fetchAsyncGetDaily(String(category_id)))
+  document.bgColor = "#eeeeff";
+  // document..elements[category_id].style.background = '#FF0000';
 }
 
 const Category: React.FC = () => {
@@ -35,7 +37,7 @@ const Category: React.FC = () => {
         <Paper elevation={0}>
           <ListItem
             button
-            onClick={(event) => dispatch(fetchAsyncGetDaily(""))}
+            onClick={(event) => chgCategory("", dispatch)}
           >
             <ListItemText primary="カテゴリ" />
           </ListItem>
