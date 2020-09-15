@@ -9,7 +9,7 @@ import Divider from '@material-ui/core/Divider';
 import { MemoryRouter } from 'react-router';
 import { useSelector, useDispatch } from "react-redux";
 import { selectCategories } from "./categorySlice";
-import { fetchAsyncGetDaily } from "../article/articleSlice";
+import { fetchAsyncGetArticles } from "../article/articleSlice";
 import { fetchAsyncSetPage } from "../article/pageSlice";
 
 const useStyles = makeStyles((theme) => ({
@@ -19,11 +19,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const chgCategory = (category_id: String, dispatch: any) => {
+const chgCategory = (category_id: String, category_name: String, dispatch: any) => {
   dispatch(fetchAsyncSetPage(1))
-  dispatch(fetchAsyncGetDaily(String(category_id)))
-  document.bgColor = "#eeeeff";
-  // document..elements[category_id].style.background = '#FF0000';
+  dispatch(fetchAsyncGetArticles(String(category_id)))
 }
 
 const Category: React.FC = () => {
@@ -37,7 +35,7 @@ const Category: React.FC = () => {
         <Paper elevation={0}>
           <ListItem
             button
-            onClick={(event) => chgCategory("", dispatch)}
+            onClick={(event) => chgCategory("", "", dispatch)}
           >
             <ListItemText primary="カテゴリ" />
           </ListItem>
@@ -46,7 +44,7 @@ const Category: React.FC = () => {
             {categories.map((category) => (
               <ListItem
                 button
-                onClick={(event) => chgCategory(String(category.id), dispatch)}
+                onClick={(event) => chgCategory(String(category.id), category.name, dispatch)}
               >
                 <ListItemText primary={category.name} />
               </ListItem>

@@ -24,7 +24,7 @@ import { Omit } from '@material-ui/types';
 
 import { useDispatch } from "react-redux";
 
-import { selectArticles, fetchAsyncGetDaily } from "./article/articleSlice";
+import { selectArticles, fetchAsyncGetArticles } from "./article/articleSlice";
 import { fetchAsyncGetCategory } from "./category/categorySlice";
 import Articles from "./article/Articles";
 import Category from "./category/Category";
@@ -74,7 +74,7 @@ const Index: React.FC = () => {
     // const daily = useSelector(selectArticles)
 
     useEffect(() => {
-        dispatch(fetchAsyncGetDaily(""));
+        dispatch(fetchAsyncGetArticles(""));
     }, [dispatch]);
 
     useEffect(() => {

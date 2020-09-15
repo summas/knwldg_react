@@ -17,7 +17,7 @@ const initialState: articleState = {
     article: article
 };
 
-export const fetchAsyncGetDaily = createAsyncThunk(
+export const fetchAsyncGetArticles = createAsyncThunk(
     "article/getArticle",
     async () => {
         const { data } = await axios.get<string>(`${HOST}/${apiUrl}`);
@@ -30,7 +30,7 @@ export const fetchAsyncGetDaily = createAsyncThunk(
 //     initialState: initialState,
 //     reducers: {},
 //     extraReducers: (builder) => {
-//         builder.addCase(fetchAsyncGetDaily.fulfilled, (state, action) => {
+//         builder.addCase(fetchAsyncGetArticles.fulfilled, (state, action) => {
 //             return {
 //                 ...state,
 //                 article: action.payload.data
