@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
+import ReactDOM from 'react-dom';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -9,6 +10,7 @@ import Divider from '@material-ui/core/Divider';
 import { MemoryRouter } from 'react-router';
 import { useSelector, useDispatch } from "react-redux";
 import { selectCategories } from "./categorySlice";
+import { fetchAsyncSetCateName } from "../catename/cateNameSlice";
 import { fetchAsyncGetArticles } from "../article/articleSlice";
 import { fetchAsyncSetPage } from "../article/pageSlice";
 
@@ -22,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 const chgCategory = (category_id: String, category_name: String, dispatch: any) => {
   dispatch(fetchAsyncSetPage(1))
   dispatch(fetchAsyncGetArticles(String(category_id)))
+  dispatch(fetchAsyncSetCateName(category_name))
 }
 
 const Category: React.FC = () => {
