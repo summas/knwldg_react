@@ -12,8 +12,7 @@ const initialState: cateState = {
 export const fetchAsyncSetCateName = createAsyncThunk(
   "page/getCateName",
   async (cateName: String) => {
-    let value: string = (cateName == "") ? "" : "○";
-    const data = value + cateName;
+    const data = cateName;
     return { String: data };
   }
 );

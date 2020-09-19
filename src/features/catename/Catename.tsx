@@ -1,39 +1,38 @@
 import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import ReactDOM from 'react-dom';
-
-import {
-  Typography
-} from "@material-ui/core";
-
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Paper from '@material-ui/core/Paper';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import { MemoryRouter } from 'react-router';
-import { useSelector, useDispatch } from "react-redux";
+import { Typography } from "@material-ui/core";
+import { useSelector } from "react-redux";
 import { selectCateName } from "./cateNameSlice";
-import { fetchAsyncGetArticles } from "../article/articleSlice";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 200,
-    marginTop: 70,
+    marginLeft: 120,
   },
+  catename: {
+    marginLeft: 8,
+  },
+
 }));
 
 const Catename: React.FC = () => {
   const classes = useStyles();
   const catename = useSelector(selectCateName);
-  console.log("catename");
-  console.log(catename);
-  const dispatch = useDispatch();
+  let folderIcon;
+
+  if (catename != "") {
+    folderIcon = <FolderOpenIcon fontSize="small" />
+  } else {
+    folderIcon = "";
+  }
 
   return (
-    <Typography className={classes.root} style={{ textAlign: "right" }}>
-      {catename}
+    <Typography className={classes.root} style={{ textAlign: "left" }}>
+      {folderIcon}
+      <span className={classes.catename}>
+        {catename}
+      </span>
     </Typography>
   );
 };
