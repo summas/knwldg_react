@@ -21,16 +21,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const chgCategory = (category_id: String, category_name: String, dispatch: any) => {
-  dispatch(fetchAsyncSetPage(1))
-  dispatch(fetchAsyncGetArticles(String(category_id)))
-  dispatch(fetchAsyncSetCateName(category_name))
-}
-
 const Category: React.FC = () => {
   const classes = useStyles();
   const categories = useSelector(selectCategories);
   const dispatch = useDispatch();
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  const chgCategory = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: number,
+    category_id: String,
+    category_name: String,
+    dispatch: any) => {
+    setSelectedIndex(index);
+    dispatch(fetchAsyncSetPage(1))
+    dispatch(fetchAsyncGetArticles(String(category_id)))
+    dispatch(fetchAsyncSetCateName(category_name))
+
+  }
 
   return (
     <MemoryRouter initialEntries={['/drafts']} initialIndex={0} >
@@ -38,7 +46,7 @@ const Category: React.FC = () => {
         <Paper elevation={0}>
           <ListItem
             button
-            onClick={(event) => chgCategory("", "", dispatch)}
+            onClick={(event) => chgCategory(event, 0, "", "", dispatch)}
           >
             <ListItemText primary="カテゴリ" />
           </ListItem>
@@ -47,7 +55,8 @@ const Category: React.FC = () => {
             {categories.map((category) => (
               <ListItem
                 button
-                onClick={(event) => chgCategory(String(category.id), category.name, dispatch)}
+                selected={selectedIndex === category.id}
+                onClick={(event) => chgCategory(event, category.id, String(category.id), category.name, dispatch)}
               >
                 <ListItemText primary={category.name} />
               </ListItem>
