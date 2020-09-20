@@ -13,7 +13,7 @@ import {
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
-import { selectArticles, fetchAsyncGetDaily } from "./showSlice";
+import { selectArticles, fetchAsyncGetArticles } from "./showSlice";
 import Article from "./Article";
 
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +31,7 @@ const Index: React.FC = () => {
     const daily = useSelector(selectArticles)
 
     useEffect(() => {
-        dispatch(fetchAsyncGetDaily());
+        dispatch(fetchAsyncGetArticles());
     }, [dispatch]);
 
     return (
