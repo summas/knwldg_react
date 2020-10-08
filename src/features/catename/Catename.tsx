@@ -21,7 +21,7 @@ const Catename: React.FC = () => {
   const catename = useSelector(selectCateName);
   let folderIcon;
 
-  if (catename != "") {
+  if (catename !== "") {
     folderIcon = <FolderOpenIcon fontSize="small" />
   } else {
     folderIcon = "";
