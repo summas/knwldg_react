@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import ReactDOM from 'react-dom';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -13,6 +12,7 @@ import { selectCategories } from "./categorySlice";
 import { fetchAsyncSetCateName } from "../catename/cateNameSlice";
 import { fetchAsyncGetArticles } from "../article/articleSlice";
 import { fetchAsyncSetPage } from "../article/pageSlice";
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,7 +57,9 @@ const Category: React.FC = () => {
                 button
                 selected={selectedIndex === category.id}
                 onClick={(event) => chgCategory(event, category.id, String(category.id), category.name, dispatch)}
+                key={category.id}
               >
+                <FiberManualRecordIcon fontSize="inherit" />
                 <ListItemText primary={category.name} />
               </ListItem>
             ))}

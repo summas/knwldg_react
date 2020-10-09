@@ -22,10 +22,14 @@ const useStyles = makeStyles((theme: Theme) =>
         marginTop: theme.spacing(2),
       },
     },
+    image: {
+      maxWidth: 160,
+      maxHeight: 140,
+    },
   }),
 );
 
-let getArticle = (val: any) => {
+let getArticle = (val: any, classes: any) => {
 
   if (val == null) {
     return (
@@ -34,8 +38,17 @@ let getArticle = (val: any) => {
     );
   }
 
-  var str = "articles/show/" + val.id;
-  var date = new Date(val.created_at)
+  let str = "articles/show/" + val.id;
+  let date = new Date(val.created_at)
+
+  let img_url;
+  if (val.image.url.substr(0, 4) !== "http") {
+    img_url = HOST + val.image.url;
+  } else {
+    img_url = val.image.url;
+  }
+  console.log(img_url)
+
   return (
     < Grid item xs={8} md={4} component={Card} className={styles.article} key={val.id} >
       <CardActionArea >
@@ -43,7 +56,7 @@ let getArticle = (val: any) => {
           <Link href={`${HOST}/${str}`} >
             <Grid container spacing={2} direction="row" justify="flex-end">
               <Grid item>
-                <img src={`${HOST}/${val.image.url}`} width="150" height="120" />
+                <img src={`${img_url}`} className={classes.image} alt="" />
               </Grid>
               <Grid item xs container direction="column" spacing={0}>
                 <Grid item>
@@ -94,9 +107,9 @@ const Articles: React.FC = () => {
         ? arr.slice(page * rowsPerPage - rowsPerPage, page * rowsPerPage)
         : arr
       ).map((article) => (
-        <Grid container spacing={2} justify="center">
-          {getArticle(article[0])}
-          {getArticle(article[1])}
+        <Grid container spacing={2} justify="center" key={article[0].id}>
+          {getArticle(article[0], classes)}
+          {getArticle(article[1], classes)}
         </Grid>
       ))}
 
