@@ -1,4 +1,4 @@
-// const HOST = "http://localhost";
-const HOST = "https://knwldg.xyz";
+const HOST = "http://localhost";
+// const HOST = "https://knwldg.xyz";
 
 export default HOST;
