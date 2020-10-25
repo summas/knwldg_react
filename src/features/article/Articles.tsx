@@ -36,7 +36,7 @@ let getArticle = (val: any, classes: any) => {
 
   if (val == null) {
     return (
-      < Grid item xs={8} md={4} component={Typography} className={styles.none}  >
+      < Grid item xs={12} md={3} component={Typography} className={styles.none}  >
       </Grid>
     );
   }
@@ -53,7 +53,7 @@ let getArticle = (val: any, classes: any) => {
   console.log(img_url)
 
   return (
-    < Grid item xs={8} md={4} component={Card} className={styles.article} key={val.id} >
+    < Grid item xs={12} md={3} component={Card} className={styles.article} key={val.id} >
       <CardActionArea >
         <Link href={`${HOST}/${str}`} >
           <CardMedia
@@ -103,11 +103,21 @@ const Articles: React.FC = () => {
   for (let n in articles) {
     let val = articles[n];
     let val2 = articles[parseInt(n) + 1];
-    if (parseInt(n) % 2 === 0) {
-      arr[num] = [val, val2];
+    let val3 = articles[parseInt(n) + 2];
+    if (parseInt(n) % 3 === 0) {
+      arr[num] = [val, val2, val3];
       num = num + 1;
     }
   }
+
+  // for (let n in articles) {
+  //   let val = articles[n];
+  //   let val2 = articles[parseInt(n) + 1];
+  //   if (parseInt(n) % 2 === 0) {
+  //     arr[num] = [val, val2];
+  //     num = num + 1;
+  //   }
+  // }
 
   return (
     <div className={styles.container}>
@@ -118,6 +128,7 @@ const Articles: React.FC = () => {
         <Grid container spacing={0} justify="center" key={article[0].id}>
           {getArticle(article[0], classes)}
           {getArticle(article[1], classes)}
+          {getArticle(article[2], classes)}
         </Grid>
       ))}
 
