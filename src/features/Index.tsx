@@ -51,13 +51,8 @@ const Index: React.FC = () => {
             <AppBar position="absolute">
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
-                        Covid 19 Live Dashboard
+                        ナレッジサイトReact試作
           </Typography>
-                    {/* <div>
-                        <Typography variant="body1">
-                            {new Date(daily[daily.length - 1].Date).toDateString()}
-                        </Typography>
-                    </div> */}
                 </Toolbar>
             </AppBar>
 
