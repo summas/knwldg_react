@@ -12,9 +12,11 @@ import {
 import { useDispatch } from "react-redux";
 import { fetchAsyncGetArticles } from "./article/articleSlice";
 import { fetchAsyncGetCategory } from "./category/categorySlice";
+import { fetchAsyncGetGroup } from "./group/groupSlice";
 import Articles from "./article/Articles";
 import Category from "./category/Category";
 import Catename from "./catename/Catename";
+import Group from "./group/Group";
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -46,6 +48,10 @@ const Index: React.FC = () => {
         dispatch(fetchAsyncGetCategory());
     }, [dispatch]);
 
+    useEffect(() => {
+        dispatch(fetchAsyncGetGroup());
+    }, [dispatch]);
+
     return (
         <div>
             <AppBar position="absolute">
@@ -53,14 +59,9 @@ const Index: React.FC = () => {
                     <Typography variant="h6" className={classes.title}>
                         Covid 19 Live Dashboard
           </Typography>
-                    {/* <div>
-                        <Typography variant="body1">
-                            {new Date(daily[daily.length - 1].Date).toDateString()}
-                        </Typography>
-                    </div> */}
+
                 </Toolbar>
             </AppBar>
-
             <Container className={classes.content}>
                 <Catename />
                 <Grid container spacing={3}>
@@ -69,6 +70,7 @@ const Index: React.FC = () => {
                     </Grid>
                     <Grid item xs={12} md={3}>
                         <Category />
+                        <Group />
                     </Grid>
                 </Grid>
             </Container>
