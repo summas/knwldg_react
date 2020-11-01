@@ -15,12 +15,13 @@ import { fetchAsyncGetArticles } from "../article/articleSlice";
 import { fetchAsyncSetPage } from "../article/pageSlice";
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import NativeSelect from '@material-ui/core/NativeSelect';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,10 +41,17 @@ const Group: React.FC = () => {
   const classes = useStyles();
   const groups = useSelector(selectGroups);
   const dispatch = useDispatch();
-  const [selectedGroup, setGroup] = React.useState('');
+  const [selectedGroup, setGroup] = React.useState({
+    id: 0,
+    group_name: " "
+  });
 
   const handleChange = (event: any) => {
-    setGroup(event.target.value);
+    const id = event.targe.id;
+    setGroup({
+      ...selectedGroup,
+      [id]: event.target.value,
+    });
   };
 
   return (
@@ -53,9 +61,19 @@ const Group: React.FC = () => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={1}
+          value={selectedGroup.id}
           onChange={handleChange}
+          inputProps={{
+            group_name: 'group_name',
+            id: 'age-native-simple',
+          }}
         >
+          <MenuItem
+            value={0}
+            key={0}
+          >
+            &nbsp;
+          </MenuItem>
           {groups.map((group) => (
             <MenuItem
               value={group.id}

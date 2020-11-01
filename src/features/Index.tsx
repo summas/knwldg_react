@@ -41,7 +41,7 @@ const Index: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchAsyncGetArticles(""));
+        dispatch(fetchAsyncGetArticles({ category_id: "", group_id: "" }))
     }, [dispatch]);
 
     useEffect(() => {
