@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 // import { selectGroups } from "./groupSlice";
 import { selectGroups } from "./groupSlice";
 import { fetchAsyncSetCateName } from "../catename/cateNameSlice";
-import { fetchAsyncGetArticles } from "../article/articleSlice";
+import { fetchAsyncGetArticles, exportstate } from "../article/articleSlice";
 import { fetchAsyncSetPage } from "../article/pageSlice";
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
@@ -41,39 +41,24 @@ const Group: React.FC = () => {
   const classes = useStyles();
   const groups = useSelector(selectGroups);
   const dispatch = useDispatch();
-  const [selectedGroup, setGroup] = React.useState({
-    id: 0,
-    group_name: " "
-  });
+  const [selectedGroup, setGroup] = React.useState('');
 
-  const handleChange = (event: any) => {
-    const id = event.targe.id;
-    setGroup({
-      ...selectedGroup,
-      [id]: event.target.value,
-    });
+  const handleChange = (event: React.ChangeEvent<{ value: unknown }>, group_id: String) => {
+    setGroup(event.target.value as string);
+    dispatch(fetchAsyncSetPage(1))
+    dispatch(fetchAsyncGetArticles({ category_id: exportstate.category_id, group_id: group_id }))
   };
 
   return (
     <div className={classes.root} style={{ textAlign: "center" }} >
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">グループ</InputLabel>
+        <InputLabel id="simple-select-label">グループ</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={selectedGroup.id}
-          onChange={handleChange}
-          inputProps={{
-            group_name: 'group_name',
-            id: 'age-native-simple',
-          }}
+          labelId="simple-select-label"
+          id="simple-select"
+          value={selectedGroup}
+          onChange={(event) => handleChange(event, selectedGroup)}
         >
-          <MenuItem
-            value={0}
-            key={0}
-          >
-            &nbsp;
-          </MenuItem>
           {groups.map((group) => (
             <MenuItem
               value={group.id}
@@ -84,7 +69,7 @@ const Group: React.FC = () => {
           ))}
         </Select>
       </FormControl>
-    </div>
+    </div >
   );
 };
 

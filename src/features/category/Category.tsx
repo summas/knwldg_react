@@ -10,7 +10,7 @@ import { MemoryRouter } from 'react-router';
 import { useSelector, useDispatch } from "react-redux";
 import { selectCategories } from "./categorySlice";
 import { fetchAsyncSetCateName } from "../catename/cateNameSlice";
-import { fetchAsyncGetArticles } from "../article/articleSlice";
+import { fetchAsyncGetArticles, exportstate } from "../article/articleSlice";
 import { fetchAsyncSetPage } from "../article/pageSlice";
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
@@ -31,13 +31,11 @@ const Category: React.FC = () => {
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number,
     category_id: String,
-    category_name: String,
-    dispatch: any) => {
+    category_name: String) => {
     setSelectedIndex(index);
     dispatch(fetchAsyncSetPage(1))
-    dispatch(fetchAsyncGetArticles({ category_id: category_id, group_id: "" }))
+    dispatch(fetchAsyncGetArticles({ category_id: category_id, group_id: exportstate.group_id }))
     dispatch(fetchAsyncSetCateName(category_name))
-
   }
 
   return (
@@ -46,7 +44,7 @@ const Category: React.FC = () => {
         <Paper elevation={0}>
           <ListItem
             button
-            onClick={(event) => chgCategory(event, 0, "", "", dispatch)}
+            onClick={(event) => chgCategory(event, 0, "", "")}
           >
             <ListItemText primary="カテゴリ" />
           </ListItem>
@@ -56,7 +54,7 @@ const Category: React.FC = () => {
               <ListItem
                 button
                 selected={selectedIndex === category.id}
-                onClick={(event) => chgCategory(event, category.id, String(category.id), category.name, dispatch)}
+                onClick={(event) => chgCategory(event, category.id, String(category.id), category.name)}
                 key={category.id}
               >
                 <FiberManualRecordIcon fontSize="inherit" />
