@@ -28,9 +28,14 @@ export let exportstate: articleState = {
 export const fetchAsyncGetArticles = createAsyncThunk(
     "article/getArticle",
     async ({category_id, group_id} : {category_id: String, group_id: String}) => {
+        console.log("カテゴリID" + category_id);
         exportstate.category_id = category_id;
+        console.log("グループID" + group_id);
         exportstate.group_id = group_id;
-        const { data } = await axios.get<ARTICLE>(`${HOST}/${apiUrl}/${category_id}/${group_id}`);
+        let addpath = (category_id != "") ? ("/" + category_id): "";
+        console.log("addpath1:" + addpath);
+        addpath = ((addpath != "") && (group_id != "")) ? (addpath + "/" + group_id): addpath;
+        const { data } = await axios.get<ARTICLE>(`${HOST}/${apiUrl}${addpath}`);
         return { data: data, category_id: category_id , group_id: group_id };
     }
 );

@@ -43,10 +43,11 @@ const Group: React.FC = () => {
   const dispatch = useDispatch();
   const [selectedGroup, setGroup] = React.useState('');
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>, group_id: String) => {
+  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setGroup(event.target.value as string);
     dispatch(fetchAsyncSetPage(1))
-    dispatch(fetchAsyncGetArticles({ category_id: exportstate.category_id, group_id: group_id }))
+    const category_id = (exportstate.category_id != "") ? exportstate.category_id : "0";
+    dispatch(fetchAsyncGetArticles({ category_id: category_id, group_id: event.target.value as string }))
   };
 
   return (
@@ -57,7 +58,7 @@ const Group: React.FC = () => {
           labelId="simple-select-label"
           id="simple-select"
           value={selectedGroup}
-          onChange={(event) => handleChange(event, selectedGroup)}
+          onChange={handleChange}
         >
           {groups.map((group) => (
             <MenuItem

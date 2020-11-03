@@ -34,7 +34,8 @@ const Category: React.FC = () => {
     category_name: String) => {
     setSelectedIndex(index);
     dispatch(fetchAsyncSetPage(1))
-    dispatch(fetchAsyncGetArticles({ category_id: category_id, group_id: exportstate.group_id }))
+    const category_id_articles = (category_id != "") ? category_id : "0";
+    dispatch(fetchAsyncGetArticles({ category_id: category_id_articles, group_id: exportstate.group_id }))
     dispatch(fetchAsyncSetCateName(category_name))
   }
 
