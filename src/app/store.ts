@@ -1,8 +1,9 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import articleReducer from "../features/article/articleSlice"
 import categoryReducer from "../features/category/categorySlice"
 import pageReducer from "../features/article/pageSlice"
 import cateNameReducer from "../features/catename/cateNameSlice"
+import groupReducer from "../features/group/groupSlice"
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     category: categoryReducer,
     page: pageReducer,
     cateName: cateNameReducer,
+    group: groupReducer,
   },
 });
 
