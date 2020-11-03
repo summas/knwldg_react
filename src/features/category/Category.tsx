@@ -10,7 +10,7 @@ import { MemoryRouter } from 'react-router';
 import { useSelector, useDispatch } from "react-redux";
 import { selectCategories } from "./categorySlice";
 import { fetchAsyncSetCateName } from "../catename/cateNameSlice";
-import { fetchAsyncGetArticles, exportstate } from "../article/articleSlice";
+import { fetchAsyncGetArticles, exportState } from "../article/articleSlice";
 import { fetchAsyncSetPage } from "../article/pageSlice";
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
@@ -30,13 +30,13 @@ const Category: React.FC = () => {
   const chgCategory = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number,
-    category_id: String,
-    category_name: String) => {
+    categoryId: String,
+    categoryName: String) => {
     setSelectedIndex(index);
     dispatch(fetchAsyncSetPage(1))
-    const category_id_articles = (category_id != "") ? category_id : "0";
-    dispatch(fetchAsyncGetArticles({ category_id: category_id_articles, group_id: exportstate.group_id }))
-    dispatch(fetchAsyncSetCateName(category_name))
+    const categoryIdForArticles = (categoryId !== "") ? categoryId : "0";
+    dispatch(fetchAsyncGetArticles({ categoryId: categoryIdForArticles, groupId: exportState.groupId }))
+    dispatch(fetchAsyncSetCateName(categoryName))
   }
 
   return (

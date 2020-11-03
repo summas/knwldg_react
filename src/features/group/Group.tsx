@@ -1,33 +1,18 @@
 import React from 'react';
-// import { makeStyles } from "@material-ui/core/styles";
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Paper from '@material-ui/core/Paper';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import { MemoryRouter } from 'react-router';
+
 import { useSelector, useDispatch } from "react-redux";
-// import { selectGroups } from "./groupSlice";
 import { selectGroups } from "./groupSlice";
-import { fetchAsyncSetCateName } from "../catename/cateNameSlice";
-import { fetchAsyncGetArticles, exportstate } from "../article/articleSlice";
+import { fetchAsyncGetArticles, exportState } from "../article/articleSlice";
 import { fetchAsyncSetPage } from "../article/pageSlice";
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: 200,
-    marginTop: 12,
-  },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
@@ -46,31 +31,35 @@ const Group: React.FC = () => {
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setGroup(event.target.value as string);
     dispatch(fetchAsyncSetPage(1))
-    const category_id = (exportstate.category_id != "") ? exportstate.category_id : "0";
-    dispatch(fetchAsyncGetArticles({ category_id: category_id, group_id: event.target.value as string }))
+    const categoryId = (exportState.categoryId !== "") ? exportState.categoryId : "0";
+    dispatch(fetchAsyncGetArticles({ categoryId: categoryId, groupId: event.target.value as string }))
   };
 
   return (
-    <div className={classes.root} style={{ textAlign: "center" }} >
-      <FormControl className={classes.formControl}>
-        <InputLabel id="simple-select-label">グループ</InputLabel>
-        <Select
-          labelId="simple-select-label"
-          id="simple-select"
-          value={selectedGroup}
-          onChange={handleChange}
+    <FormControl className={classes.formControl}>
+      <InputLabel id="simple-select-label">グループ</InputLabel>
+      <Select
+        labelId="simple-select-label"
+        id="simple-select"
+        value={selectedGroup}
+        onChange={handleChange}
+      >
+        <MenuItem
+          value={""}
+          key={0}
         >
-          {groups.map((group) => (
-            <MenuItem
-              value={group.id}
-              key={group.id}
-            >
-              {group.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div >
+          {"--未設定--"}
+        </MenuItem>
+        {groups.map((group) => (
+          <MenuItem
+            value={group.id}
+            key={group.id}
+          >
+            {group.name}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 };
 
