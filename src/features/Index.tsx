@@ -42,13 +42,7 @@ const Index: React.FC = () => {
 
     useEffect(() => {
         dispatch(fetchAsyncGetArticles({ categoryId: "", groupId: "" }))
-    }, [dispatch]);
-
-    useEffect(() => {
         dispatch(fetchAsyncGetCategory());
-    }, [dispatch]);
-
-    useEffect(() => {
         dispatch(fetchAsyncGetGroup());
     }, [dispatch]);
 
@@ -57,7 +51,7 @@ const Index: React.FC = () => {
             <AppBar position="absolute">
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
-                        Covid 19 Live Dashboard
+                        PFナレッジサイトReact試作
           </Typography>
 
                 </Toolbar>
