@@ -12,9 +12,11 @@ import {
 import { useDispatch } from "react-redux";
 import { fetchAsyncGetArticles } from "./article/articleSlice";
 import { fetchAsyncGetCategory } from "./category/categorySlice";
+import { fetchAsyncGetGroup } from "./group/groupSlice";
 import Articles from "./article/Articles";
 import Category from "./category/Category";
 import Catename from "./catename/Catename";
+import Group from "./group/Group";
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -39,11 +41,9 @@ const Index: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchAsyncGetArticles(""));
-    }, [dispatch]);
-
-    useEffect(() => {
+        dispatch(fetchAsyncGetArticles({ categoryId: "", groupId: "" }))
         dispatch(fetchAsyncGetCategory());
+        dispatch(fetchAsyncGetGroup());
     }, [dispatch]);
 
     return (
@@ -53,9 +53,9 @@ const Index: React.FC = () => {
                     <Typography variant="h6" className={classes.title}>
                         PFナレッジサイトReact試作
           </Typography>
+
                 </Toolbar>
             </AppBar>
-
             <Container className={classes.content}>
                 <Catename />
                 <Grid container spacing={3}>
@@ -64,6 +64,7 @@ const Index: React.FC = () => {
                     </Grid>
                     <Grid item xs={12} md={3}>
                         <Category />
+                        <Group />
                     </Grid>
                 </Grid>
             </Container>
