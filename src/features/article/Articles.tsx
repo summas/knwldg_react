@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectArticles } from "./articleSlice";
 import { selectPage, fetchAsyncSetPage } from "./pageSlice";
 import Pagination from '@material-ui/lab/Pagination';
-
+import { truncateString } from "../common/common";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,10 +27,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-
-let truncateTitle = (title: String, len: number) => {
-  return (title.length <= len ? title : (title.substr(0, len) + "..."));
-};
 
 let getArticle = (val: any, classes: any) => {
 
@@ -50,7 +46,6 @@ let getArticle = (val: any, classes: any) => {
   } else {
     img_url = val.image.url;
   }
-  console.log(img_url)
 
   return (
     < Grid item xs={8} md={4} component={Card} className={styles.article} key={val.id} >
@@ -59,17 +54,14 @@ let getArticle = (val: any, classes: any) => {
           <CardMedia
             className={classes.media}
             image={`${img_url}`}
-            title="Contemplative Reptile"
+            title="Article Thumbnail"
           />
           <CardContent >
             <Grid container spacing={0} direction="row" justify="flex-end">
-              {/* <Grid item>
-                <img src={`${img_url}`} width="150" height="120" alt="" />
-              </Grid> */}
               <Grid item xs container direction="column" spacing={0}>
                 <Grid item>
                   <Typography variant="subtitle1" color="textSecondary" >
-                    {truncateTitle(val.title, 23)}
+                    {truncateString(val.title, 23)}
                   </Typography>
                 </Grid>
               </Grid>
