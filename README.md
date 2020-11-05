@@ -9,4 +9,5 @@
 
 #  使用技術
 - React 16.13.1, Typescript 3.9.5
+- Redux
 - Material-UI
