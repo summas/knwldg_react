@@ -32,7 +32,7 @@ let getArticle = (val: any, classes: any) => {
 
   if (val == null) {
     return (
-      < Grid item xs={8} md={4} component={Typography} className={styles.none}  >
+      < Grid item xs={4} sm={4} md={3} component={Typography} className={styles.none}  >
       </Grid>
     );
   }
@@ -48,7 +48,7 @@ let getArticle = (val: any, classes: any) => {
   }
 
   return (
-    < Grid item xs={8} md={4} component={Card} className={styles.article} key={val.id} >
+    < Grid item xs={8} sm={4} md={3} component={Card} className={styles.article} key={val.id} >
       <CardActionArea >
         <Link href={`${HOST}/${str}`} >
           <CardMedia
@@ -83,39 +83,26 @@ const Articles: React.FC = () => {
   const page: number = useSelector(selectPage);
 
   const classes = useStyles();
-  const [rowsPerPage] = React.useState(5);
+  const [rowsPerPage] = React.useState(12);
   const dispatch = useDispatch();
 
   const handleChangePage = (event: React.ChangeEvent<unknown>, newPage: number) => {
     dispatch(fetchAsyncSetPage(newPage))
   };
 
-  let arr = [];
-  let num: number = 0;
-  for (let n in articles) {
-    let val = articles[n];
-    let val2 = articles[parseInt(n) + 1];
-    if (parseInt(n) % 2 === 0) {
-      arr[num] = [val, val2];
-      num = num + 1;
-    }
-  }
-
   return (
     <div className={styles.container}>
-      {(rowsPerPage > 0
-        ? arr.slice(page * rowsPerPage - rowsPerPage, page * rowsPerPage)
-        : arr
-      ).map((article) => (
-        <Grid container spacing={0} justify="center" key={article[0].id}>
-          {getArticle(article[0], classes)}
-          {getArticle(article[1], classes)}
-        </Grid>
-      ))}
-
+      <Grid container spacing={0} justify="center" key="1">
+        {(rowsPerPage > 0
+          ? articles.slice(page * rowsPerPage - rowsPerPage, page * rowsPerPage)
+          : articles
+        ).map((article) => (
+          getArticle(article, classes)
+        ))}
+      </Grid>
       <div className={classes.paginate}>
         <Pagination
-          count={Math.ceil(arr.length / rowsPerPage)}
+          count={Math.ceil(articles.length / rowsPerPage)}
           page={page}
           defaultPage={1}
           onChange={handleChangePage}
