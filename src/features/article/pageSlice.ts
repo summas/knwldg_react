@@ -9,12 +9,10 @@ const initialState: pageState = {
     page: 1,
 };
 
-
 export const fetchAsyncSetPage = createAsyncThunk(
     "page/getPage",
     async (page: number) => {
-        const data = page;
-        return { Number: data };
+        return { Number: page };
     }
 );
 

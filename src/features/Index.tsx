@@ -17,6 +17,8 @@ import Articles from "./article/Articles";
 import Category from "./category/Category";
 import Catename from "./catename/Catename";
 import Group from "./group/Group";
+import Box from '@material-ui/core/Box';
+
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -56,11 +58,13 @@ const Index: React.FC = () => {
 
                 </Toolbar>
             </AppBar>
-            <Container className={classes.content}>
+            <Container className={classes.content} >
                 <Catename />
                 <Grid container spacing={3}>
                     <Grid item xs={12} md={9}>
-                        <Articles />
+                        <Box border={1} borderColor="grey.300" borderRadius="borderRadius" >
+                            <Articles />
+                        </Box>
                     </Grid>
                     <Grid item xs={12} md={3}>
                         <Category />
